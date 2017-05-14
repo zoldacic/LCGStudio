@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/SimpleDragAndDrop/Scenes/MainScene.unity
+- path: Assets/L5R/Scenes/PlayArea.unity
   isLoaded: 1
   isActive: 1
