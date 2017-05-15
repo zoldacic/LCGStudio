@@ -14,6 +14,7 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
         Swap,                                                               // Items will be swapped between cells
         DropOnly,                                                           // Item will be dropped into cell
         DragOnly,                                                           // Item will be dragged from this cell
+        DragAndDrop,                                                        // Item will be dragged from this cell and dropped into cell
         UnlimitedSource                                                     // Item will be cloned and dragged from this cell
     }
     public CellType cellType = CellType.Swap;                               // Special type of this cell
@@ -158,6 +159,7 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
                             }
                             break;
                         case CellType.DropOnly:
+                        case CellType.DragAndDrop:
                             PlaceItem(item.gameObject);                     // Place dropped item in this cell
                             // Fill event descriptor
                             desc.item = item;
@@ -206,11 +208,11 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
     /// <param name="itemObj"> New item's object with DragAndDropItemBase  script </param>
     public void PlaceItem(GameObject itemObj)
     {
-        // RemoveItem();                                                       // Remove current item from this cell
+        HandlePreviousItem();
         if (itemObj != null)
         {
             itemObj.transform.SetParent(transform, false);
-            itemObj.transform.localPosition = Vector3.zero;
+            PlaceItemPosition(itemObj);
             DragAndDropItemBase  item = itemObj.GetComponent<DragAndDropItemBase>();
             if (item != null)
             {
@@ -218,6 +220,16 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
             }
             SetBackgroundState(true);
         }
+    }
+
+    public virtual void HandlePreviousItem()
+    {
+        RemoveItem();                                                       // Remove current item from this cell
+    }
+
+    public virtual void PlaceItemPosition(GameObject itemObj)
+    {
+        itemObj.transform.localPosition = Vector3.zero;
     }
 
     /// <summary>

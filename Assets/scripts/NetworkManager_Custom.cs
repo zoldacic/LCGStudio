@@ -19,7 +19,7 @@ public class NetworkManager_Custom : NetworkManager {
 
     private void SetIPAddress()
     {
-        var ipAddress = GameObject.Find("InputFieldIPAddress").transform.FindChild("Text").GetComponent<Text>().text;
+        var ipAddress = GameObject.Find("InputFieldIPAddress").transform.Find("Text").GetComponent<Text>().text;
         NetworkManager.singleton.networkAddress = ipAddress;
     }
 
