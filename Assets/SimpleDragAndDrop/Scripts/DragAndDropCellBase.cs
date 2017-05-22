@@ -148,7 +148,7 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
                                     }
                                     break;
                                 default:
-                                    PlaceItem(item.gameObject);             // Place dropped item in this cell
+                                    PlaceItem(item.gameObject, data.position);             // Place dropped item in this cell
                                     // Fill event descriptor
                                     desc.item = item;
                                     desc.sourceCell = sourceCell;
@@ -160,7 +160,7 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
                             break;
                         case CellType.DropOnly:
                         case CellType.DragAndDrop:
-                            PlaceItem(item.gameObject);                     // Place dropped item in this cell
+                            PlaceItem(item.gameObject, data.position);                     // Place dropped item in this cell
                             // Fill event descriptor
                             desc.item = item;
                             desc.sourceCell = sourceCell;
@@ -206,13 +206,13 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
     /// Put new item in this cell
     /// </summary>
     /// <param name="itemObj"> New item's object with DragAndDropItemBase  script </param>
-    public void PlaceItem(GameObject itemObj)
+    public void PlaceItem(GameObject itemObj, Vector2 dropPosition)
     {
         HandlePreviousItem();
         if (itemObj != null)
         {
             itemObj.transform.SetParent(transform, false);
-            PlaceItemPosition(itemObj);
+            PlaceItemPosition(itemObj, new Vector2(dropPosition.x - transform.position.x, dropPosition.y - transform.position.y)); 
             DragAndDropItemBase  item = itemObj.GetComponent<DragAndDropItemBase>();
             if (item != null)
             {
@@ -227,7 +227,7 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
         RemoveItem();                                                       // Remove current item from this cell
     }
 
-    public virtual void PlaceItemPosition(GameObject itemObj)
+    public virtual void PlaceItemPosition(GameObject itemObj, Vector2 dropPosition)
     {
         itemObj.transform.localPosition = Vector3.zero;
     }

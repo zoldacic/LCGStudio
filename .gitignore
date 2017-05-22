@@ -1,6 +1,6 @@
 # Unity pdb files, especially those big ones that are not allowed on github
 *.pdb
-
+metadata\
 
 #################
 ## Eclipse

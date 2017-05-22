@@ -8,9 +8,9 @@ namespace Assets.SimpleDragAndDrop.Scripts
 {
     public class OpenArea : DragAndDropCellBase
     {
-        public override void PlaceItemPosition(GameObject itemObj)
+        public override void PlaceItemPosition(GameObject itemObj, Vector2 dropPosition)
         {
-            // Do nothing - keep where dropped
+            itemObj.transform.localPosition = new Vector3(dropPosition.x, dropPosition.y, itemObj.transform.localPosition.z);
         }
 
         public override void HandlePreviousItem()
