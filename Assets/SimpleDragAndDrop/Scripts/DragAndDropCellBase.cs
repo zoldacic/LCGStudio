@@ -185,7 +185,7 @@ public class DragAndDropCellBase : MonoBehaviour, IDropHandler
     /// Change cell's sprite color on item put/remove
     /// </summary>
     /// <param name="condition"> true - filled, false - empty </param>
-    private void SetBackgroundState(bool condition)
+    protected virtual void SetBackgroundState(bool condition)
     {
         GetComponent<Image>().color = condition ? full : empty;
     }

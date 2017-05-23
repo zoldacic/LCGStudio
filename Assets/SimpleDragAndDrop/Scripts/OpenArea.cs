@@ -17,5 +17,10 @@ namespace Assets.SimpleDragAndDrop.Scripts
         {
             // Do nothing
         }
+
+        protected override void SetBackgroundState(bool condition)
+        {
+            // Do nothing
+        }
     }
 }
