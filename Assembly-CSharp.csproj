@@ -46,13 +46,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\L5R\Scripts\MarkCardOnClick-Camera.cs" />
+     <Compile Include="Assets\L5R\Scripts\MarkCardOnClick.cs" />
+     <Compile Include="Assets\SimpleDragAndDrop\NetworkManager_Custom.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\Deck.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropCellBase.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropItemBase.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
      <Compile Include="Assets\SimpleDragAndDrop\Scripts\OpenArea.cs" />
      <Compile Include="Assets\scripts\LoadScene.cs" />
-     <Compile Include="Assets\scripts\NetworkManager_Custom.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
