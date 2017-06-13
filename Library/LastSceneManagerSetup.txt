@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/L5R/Scenes/PlayArea.unity
+- path: Assets/L5R/Scenes/Deck Building.unity
   isLoaded: 1
   isActive: 1
