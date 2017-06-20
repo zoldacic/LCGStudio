@@ -5,11 +5,11 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.SimpleDragAndDrop.Scripts
+namespace Assets.L5R.Scripts
 {
     class CardLoader : MonoBehaviour
     {
-        private string baseUrl = @"http://fiveringsdb.com/api/";
+        private string baseUrl = @"http://fiveringsdb.com/api/v1/";
 
         private List<string> CrabDynasty = new List<string> {
             "Borderlands Defender",
@@ -36,10 +36,9 @@ namespace Assets.SimpleDragAndDrop.Scripts
             Texture2D img = (Texture2D)Resources.Load("Images/" + clan + "/" + type + "/" + cardName);
 
             card.GetComponent<Image>().sprite = Sprite.Create(img, new Rect(0.0f, 0.0f, img.width, img.height), new Vector2(0.0f, 0.0f));
-            //card.GetComponent<CardInfo>().sprite = 
 
             // Find Parent By Name
-
+            var parent = GameObject.Find("CardSelection");
             card.transform.parent = parent.transform;
         }
 
@@ -51,11 +50,10 @@ namespace Assets.SimpleDragAndDrop.Scripts
             while (!www.isDone)
                 System.Threading.Thread.Sleep(100);
 
-            // Use Edit > Paste Special to create class
+            var rootObject = JsonUtility.FromJson<Rootobject>(www.text);
+            var cards = rootObject.records;
 
-            var cards = JsonUtility.FromJson<>(www.text).Cards;
-
-            foreach (card in cards)
+            foreach (var card in cards)
             {
                 LoadImage(card.clan_code, card.side, card.code);
             }
