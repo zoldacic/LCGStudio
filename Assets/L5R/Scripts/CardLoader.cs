@@ -50,7 +50,10 @@ namespace Assets.L5R.Scripts
             while (!www.isDone)
                 System.Threading.Thread.Sleep(100);
 
-            var rootObject = JsonUtility.FromJson<Rootobject>(www.text);
+            var text = www.text.Replace("\n", "").Replace("\\", "");
+            //var text = @""{    "records": [ {            "clan": "crane",            "code": "above-question",            "cost": 1,            "cycles":   {                "core": 1            },            "illustrator": "Stu Barnes",            "influence_cost": 	2,            "is_unique": false,            "keywords": "Condition.",            "military_strength_mod": "+0",            "name": "Above Question",            "packs": {                "core": 1            },            "political_strength_mod": "+0",            "side": "conflict",            "text": "Attached character cannot be chosen as a target of an opponent's event.",            "type": "attachment"           },       ],    "size": 65,    "success": true,    "last_updated": "2017-06-24T08:21:51+00:00"}                "";
+
+            var rootObject = JsonUtility.FromJson<Rootobject>(text);
             var cards = rootObject.records;
 
             foreach (var card in cards)
