@@ -7,54 +7,67 @@ namespace Assets.L5R.Scripts
 {
     // --------- Use Edit > Paste Special to create class --------- 
 
+    //[Serializable]
+    //public class Rootobject
+    //{
+    //    //public Record[] records;
+    //    public int size;
+    //    public bool success;
+    //}
+
+    //[Serializable]
+    //public class Record
+    //{
+    //    public string clan;
+    //}
+
     [Serializable]
     public class Rootobject
     {
-        public Card[] records { get; set; }
-        public int size { get; set; }
-        public bool success { get; set; }
-        public DateTime last_updated { get; set; }
+        public Record[] records;
+        public int size;
+        public bool success;
+        public DateTime last_updated;
     }
 
     [Serializable]
-    public class Card
+    public class Record
     {
-        public string clan_code { get; set; }
-        public string code { get; set; }
-        public int cost { get; set; }
-        public Cycles cycles { get; set; }
-        public string illustrator { get; set; }
-        public int influence_cost { get; set; }
-        public bool is_unique { get; set; }
-        public string keywords { get; set; }
-        public string military_strength_mod { get; set; }
-        public string name { get; set; }
-        public Packs packs { get; set; }
-        public string political_strength_mod { get; set; }
-        public string side { get; set; }
-        public string text { get; set; }
-        public string type_code { get; set; }
-        public int glory { get; set; }
-        public int military_strength { get; set; }
-        public int political_strength { get; set; }
-        public string province_strength_mod { get; set; }
-        public string element_code { get; set; }
-        public int province_strength { get; set; }
-        public int fate { get; set; }
-        public int honor { get; set; }
-        public int influence_pool { get; set; }
+        public string clan;
+        public string code;
+        public int cost;
+        public Cycles cycles;
+        public string illustrator;
+        public int influence_cost;
+        public bool is_unique;
+        public string keywords;
+        public string military_strength_mod;
+        public string name;
+        public Packs packs;
+        public string political_strength_mod;
+        public string side;
+        public string text;
+        public string type;
+        public int glory;
+        public int military_strength;
+        public int political_strength;
+        public string province_strength_mod;
+        public string element;
+        public int province_strength;
+        public int fate;
+        public int honor;
+        public int influence_pool;
     }
 
     [Serializable]
     public class Cycles
     {
-        public int core { get; set; }
+        public int core;
     }
 
     [Serializable]
     public class Packs
     {
-        public int core { get; set; }
+        public int core;
     }
-
 }
