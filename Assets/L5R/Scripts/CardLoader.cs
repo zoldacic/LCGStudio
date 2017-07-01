@@ -18,6 +18,23 @@ namespace Assets.L5R.Scripts
             "Shrewd Yasaki"
         };
 
+        private Rootobject _rootObject;
+
+        private string _filterText;
+
+        public void Start()
+        {
+            var www = new WWW(baseUrl + "cards");
+            _rootObject = JsonUtility.FromJson<Rootobject>(www.text);
+
+            GameObject.Find("FilterText").GetComponent<InputField>().onEndEdit.AddListener(SetFilterText);
+        }
+
+        private void SetFilterText(string value)
+        {
+            _filterText = value;
+        }
+
         public void LoadImages(GameObject parent)
         {
             CrabDynasty.ForEach(cardName =>
@@ -48,26 +65,17 @@ namespace Assets.L5R.Scripts
         }
 
         public void LoadCardInfo()
-        {             
-            var www = new WWW(baseUrl + "cards");
-            //yield return www;           
+        {
+            IEnumerable<Record> cards = _rootObject.records;
 
-            while (!www.isDone)
-                System.Threading.Thread.Sleep(100);
-
-            //var text = "{    \"records\": [ { \"clan\": \"crane\" }, ],    \"size\": 65,    \"success\": true, \"last_updated\": \"2017-06-24T08:21:51+00:00\"}";
-            //var text = "{    \"records\": [ { \"clan\": \"crane\" }, ],     \"success\": true }";
-            //var text = www.text.Replace("\n", ""); //.Replace("\"", "Ö").Replace('Ö','"');
-            //var text = @""{    "records": [ {            "clan": "crane",            "code": "above-question",            "cost": 1,            "cycles":   {                "core": 1            },            "illustrator": "Stu Barnes",            "influence_cost": 	2,            "is_unique": false,            "keywords": "Condition.",            "military_strength_mod": "+0",            "name": "Above Question",            "packs": {                "core": 1            },            "political_strength_mod": "+0",            "side": "conflict",            "text": "Attached character cannot be chosen as a target of an opponent's event.",            "type": "attachment"           },       ],    "size": 65,    "success": true,    "last_updated": "2017-06-24T08:21:51+00:00"}                "";
-
-            //var text = "{ \"records\": [ { \"clan\": \"crane\", }, ], \"size\": 65, \"success\": true, \"last_updated\": \"2017-06-24T08:21:51+00:00\" }";
-            //var text = "{ \"records\": [ { \"clan\": \"crane\" } ], \"size\": 65, \"success\": true }";
-            //var text = "{ \"records\": [ { \"clan\": \"crane\" } ] }";
-            //var text = "{ \"size\": 65, \"success\": true }";
-
-            var rootObject = JsonUtility.FromJson<Rootobject>(www.text);
-            //var a = rootObject.size;
-            var cards = rootObject.records;
+            //var filterText = GameObject.Find("FilterText").GetComponent<Text>().text;
+            if (_filterText.Contains("c:"))
+            {
+                var filterStart = _filterText.IndexOf("c:");
+                var filterStop = _filterText.IndexOf(' ', filterStart);
+                var filterClan = _filterText.Substring(filterStart, filterStop > -1 ? filterStop : _filterText.Length - 1);
+                cards = cards.Where(c => c.clan == filterClan);
+            }
 
             foreach (var card in cards)
             {
